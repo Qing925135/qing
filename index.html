@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>滕王阁 · 数字之境</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;300;400;500;600;700;900&family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- 自定义光标 -->
+<div class="cursor-brush" id="cursorBrush"></div>
+
+<!-- 卷轴进度条 -->
+<div class="scroll-progress" id="scrollProgress">
+  <div class="knob" id="scrollKnob"></div>
+</div>
+
+<!-- 导航栏 -->
+<nav class="nav-capsule" id="navCapsule">
+  <a href="index.html" class="nav-brand active">滕王阁</a>
+  <a href="culture.html" class="nav-link" data-section="culture">文化解码</a>
+  <a href="architecture.html" class="nav-link" data-section="architecture">神工天巧</a>
+  <a href="poetry.html" class="nav-link" data-section="poetry">文光射斗</a>
+  <a href="guide.html" class="nav-link" data-section="guide">宴游指南</a>
+  <a href="map.html" class="nav-link" data-section="map">探访实录</a>
+  <button class="nav-theme-toggle" id="themeToggle" title="切换夜宴模式">🌙</button>
+</nav>
+
+<!-- 灯箱 -->
+<div class="lightbox-overlay" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">✕</button>
+  <img src="" alt="" id="lightboxImg">
+</div>
+
+<!-- 声音控制 -->
+<button class="sound-toggle muted" id="soundToggle" title="开启环境音">🔇</button>
+
+<!-- ====== 页面主体内容 ====== -->
+
+<!-- ============================================
+     壹 · 豫章故郡（首屏沉浸场）
+     ============================================ -->
+<section class="hero section" id="hero">
+  <div class="hero-bg"></div>
+  <canvas id="hero-canvas"></canvas>
+
+  <!-- 飞鸟 -->
+  <div class="birds">
+    <div class="bird" style="top:20%;animation-duration:12s;animation-delay:0s;"></div>
+    <div class="bird" style="top:25%;animation-duration:14s;animation-delay:2s;"></div>
+    <div class="bird" style="top:18%;animation-duration:11s;animation-delay:4s;"></div>
+    <div class="bird" style="top:30%;animation-duration:16s;animation-delay:1s;"></div>
+    <div class="bird" style="top:22%;animation-duration:13s;animation-delay:6s;"></div>
+  </div>
+
+  <div class="hero-text">
+    <h1 class="hero-title">滕王阁</h1>
+    <div class="hero-divider"></div>
+    <div class="hero-subtitle">豫章故郡 · 洪都新府</div>
+    <div class="hero-slogan">落霞与孤鹜齐飞 · 秋水共长天一色</div>
+  </div>
+
+  <a href="culture.html" class="hero-scroll-hint">进入画卷 · 文化解码 →</a>
+</section>
+
+<!-- 页脚 -->
+<footer class="footer-section" id="footer">
+  <div class="footer-poem reveal">
+    阁中帝子今何在？<br>槛外长江空自流。
+  </div>
+  <div class="footer-info reveal">
+    <p>江西省南昌市东湖区仿古街58号</p>
+    <p>电话：(0791) 8670-2636</p>
+    <p>开放时间：08:00 - 18:00（夏季）/ 08:00 - 17:30（冬季）</p>
+    <p style="margin-top:16px;">
+      <a href="#">官方网站</a> · <a href="#">在线购票</a> · <a href="#">虚拟游览</a>
+    </p>
+  </div>
+  <button class="fly-letter-btn reveal">
+    <span class="bird-icon">🕊️</span>
+    <span>飞鸿传书 · 联系我们</span>
+  </button>
+  <div class="footer-copyright">
+    © 2026 滕王阁数字之境 · 设计构想
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
