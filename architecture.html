@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>滕王阁 · 数字之境 — 叁·神工天巧</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;300;400;500;600;700;900&family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- 自定义光标 -->
+<div class="cursor-brush" id="cursorBrush"></div>
+
+<!-- 卷轴进度条 -->
+<div class="scroll-progress" id="scrollProgress">
+  <div class="knob" id="scrollKnob"></div>
+</div>
+
+<!-- 导航栏 -->
+<nav class="nav-capsule" id="navCapsule">
+  <a href="index.html" class="nav-brand">滕王阁</a>
+  <a href="culture.html" class="nav-link" data-section="culture">文化解码</a>
+  <a href="architecture.html" class="nav-link active" data-section="architecture">神工天巧</a>
+  <a href="poetry.html" class="nav-link" data-section="poetry">文光射斗</a>
+  <a href="guide.html" class="nav-link" data-section="guide">宴游指南</a>
+  <a href="map.html" class="nav-link" data-section="map">探访实录</a>
+  <button class="nav-theme-toggle" id="themeToggle" title="切换夜宴模式">🌙</button>
+</nav>
+
+<!-- 灯箱 -->
+<div class="lightbox-overlay" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">✕</button>
+  <img src="" alt="" id="lightboxImg">
+</div>
+
+<!-- 声音控制 -->
+<button class="sound-toggle muted" id="soundToggle" title="开启环境音">🔇</button>
+
+<!-- ====== 页面主体内容 ====== -->
+
+<!-- ============================================
+     叁 · 神工天巧（建筑解构馆）
+     ============================================ -->
+<section class="section architecture" id="architecture">
+  <div class="container">
+    <div class="arch-header reveal">
+      <h2 class="section-title">叁 · 神工天巧</h2>
+      <p class="section-subtitle">明三暗七 · 榫卯相契 · 千年营造</p>
+    </div>
+
+    <!-- 建筑营造图 -->
+    <div class="arch-blueprint-container reveal">
+      <img src="images/arch-blueprint.png" alt="重建南昌滕王阁计划草图 · 中国营造学社 · 民国二十一年三月" class="arch-blueprint-img">
+      <div class="arch-blueprint-caption">
+        <span class="bp-title">重建南昌滕王阁计划草图</span>
+        <span class="bp-source">中国营造学社 · 民国二十一年（1932年）三月</span>
+      </div>
+    </div>
+
+    <!-- 建筑结构卡片 -->
+    <div class="arch-cards">
+      <div class="arch-card reveal reveal-delay-1">
+        <h3>明三暗七</h3>
+        <p>滕王阁外观三层、内部七层，是典型的"明三暗七"仿宋建筑格局。外观飞檐翘角、碧瓦重檐，内部回廊环绕、层层叠叠，体现了中国古代楼阁建筑的精妙结构。</p>
+      </div>
+      <div class="arch-card reveal reveal-delay-2">
+        <h3>斗拱藻井</h3>
+        <p>斗拱是中国古建筑的灵魂构件，层层叠出如花朵绽放。滕王阁的藻井以龙凤纹饰为主题，彩绘金箔，在藻井中心悬挂铜镜，光线折射间如梦似幻。</p>
+      </div>
+      <div class="arch-card reveal reveal-delay-3">
+        <h3>榫卯结构</h3>
+        <p>整座楼阁采用传统榫卯结构，不用一颗铁钉。木材经过防腐处理，构件之间凹凸咬合，历经风雨而稳固如初，展现了中华营造技艺的卓越智慧。</p>
+      </div>
+    </div>
+
+    <!-- 千年重楼时间轴 -->
+    <div class="timeline-section reveal">
+      <div class="timeline-title">
+        <h3 style="font-family:'ZCOOL XiaoWei',serif;font-size:24px;color:var(--text-primary);">千年重楼 · 屡毁屡建</h3>
+        <p style="font-size:14px;color:var(--text-muted);margin-top:8px;">← 左右滑动，穿越千年 →</p>
+      </div>
+      <div class="swiper timeline-swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide timeline-slide">
+            <div class="timeline-era">
+              <div class="dynasty">唐</div>
+              <div class="year">永徽四年（653年）</div>
+              <div class="description">唐高祖之子滕王李元婴任洪州都督时创建，初为歌舞宴饮之所。王勃于上元二年（675年）途经洪州，写下千古名篇《滕王阁序》。</div>
+              <div class="seal">滕</div>
+            </div>
+          </div>
+          <div class="swiper-slide timeline-slide">
+            <div class="timeline-era">
+              <div class="dynasty">宋</div>
+              <div class="year">大观二年（1108年）</div>
+              <div class="description">宋代滕王阁历经多次修缮，规模宏大。范致虚《重建滕王阁记》载其"层峦耸翠，上出重霄；飞阁流丹，下临无地"。</div>
+              <div class="seal">阁</div>
+            </div>
+          </div>
+          <div class="swiper-slide timeline-slide">
+            <div class="timeline-era">
+              <div class="dynasty">元</div>
+              <div class="year">至元年间</div>
+              <div class="description">元代滕王阁几经战火，于至正二十二年（1362年）被毁。元代画家夏永曾绘《滕王阁图》，以界画技法精确再现了阁楼全貌。</div>
+              <div class="seal">王</div>
+            </div>
+          </div>
+          <div class="swiper-slide timeline-slide">
+            <div class="timeline-era">
+              <div class="dynasty">明</div>
+              <div class="year">嘉靖年间</div>
+              <div class="description">明代多次重建，嘉靖五年（1526年）巡抚都御史陈洪谟重修，规模较前代有所缩小。文徵明曾为滕王阁作画题诗。</div>
+              <div class="seal">序</div>
+            </div>
+          </div>
+          <div class="swiper-slide timeline-slide">
+            <div class="timeline-era">
+              <div class="dynasty">清</div>
+              <div class="year">康熙年间</div>
+              <div class="description">清代滕王阁屡毁屡建，康熙二十七年（1688年）江西巡抚宋荦主持重建。清末因年久失修逐渐倾圮，至1926年被北洋军阀焚毁。</div>
+              <div class="seal">记</div>
+            </div>
+          </div>
+          <div class="swiper-slide timeline-slide">
+            <div class="timeline-era">
+              <div class="dynasty">今</div>
+              <div class="year">1989年重阳节</div>
+              <div class="description">第29次重建的滕王阁落成，坐落于南昌市赣江东岸。主体建筑净高57.5米，建筑面积13000平方米，为仿宋建筑风格，已成为南昌城市地标。</div>
+              <div class="seal">铭</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 阁内各层导览 -->
+    <div class="reveal" style="max-width:800px;margin:80px auto 0;">
+      <h3 style="font-family:'ZCOOL XiaoWei',serif;font-size:24px;color:var(--text-primary);text-align:center;margin-bottom:12px;">阁内各层 · 楼层导览</h3>
+      <p style="font-size:14px;color:var(--text-muted);text-align:center;margin-bottom:40px;">明三暗七，层层皆有洞天 · 点击展开详情</p>
+    </div>
+    <div class="floor-guide reveal">
+      <div class="floor-item">
+        <div class="floor-number">五层</div>
+        <div class="floor-name">凌霄厅 · 楚天极目</div>
+        <div class="floor-body">
+          <p>主阁五层与第三层相似，也是一个回廊四绕的明层，是欣赏外景最好的地方。中厅正中屏壁上镶嵌着用黄铜板制作的《滕王阁序》铜碑，面积近10平方米，乃苏东坡手书，经复印放大，由工匠手工镌刻而成。西厅东壁上有一幅磨漆画《百蝶百花图》，为纪念滕王阁建造者李元婴而绘制——李元婴善画蝶，所画蝴蝶千姿百态，被称作"滕派蝶画"鼻祖。</p>
+        </div>
+      </div>
+      <div class="floor-item">
+        <div class="floor-number">四层</div>
+        <div class="floor-name">地灵厅 · 钟灵毓秀</div>
+        <div class="floor-body">
+          <p>该层取名"地灵厅"，主要体现"地灵"的主题。正厅墙壁上有一幅丙烯壁画《地灵图》，集中反映了江西名山大川自然景观的精华——从南往北依次是大庾岭梅关、弋阳圭峰、上饶三清山、鹰潭龙虎山、井冈山、庐山、鄱阳湖、石钟山等。画面严谨，功力深厚，充分表现了江西"钟灵毓秀"的壮丽山川。西厅为历代滕王阁建筑景观全息数字复原展示。</p>
+        </div>
+      </div>
+      <div class="floor-item">
+        <div class="floor-number">三层</div>
+        <div class="floor-name">临川梦 · 牡丹亭</div>
+        <div class="floor-body">
+          <p>丙烯壁画《临川梦》取材于汤显祖在滕王阁排演《牡丹亭》的故事。画面以灰蓝色为基调，采用装饰手法刻画戏剧人物，体现神灵感梦的故事情节，表达了汤公对现实黑暗的抨击和对理想社会的憧憬。西大厅为古宴厅，墙上的铜浮雕《唐伎乐图》中，三位唐代舞伎正在表演霓裳羽衣舞。</p>
+        </div>
+      </div>
+      <div class="floor-item">
+        <div class="floor-number">二层</div>
+        <div class="floor-name">人杰厅 · 人杰地灵</div>
+        <div class="floor-body">
+          <p>二层为"人杰厅"，陈列有历代与滕王阁相关的文人墨客画像与事迹介绍。厅内设有"华夏圣旨博物馆"分展区，珍藏了数十道明清两代的圣旨，以及越南圣旨、日本国圣旨等珍贵文物。此外还有古代科举制度展厅，陈列了秀才、举人的试题、试卷、朱卷，以及清代考生作弊使用的丝织夹带等，生动展现了古代科举文化的方方面面。</p>
+        </div>
+      </div>
+      <div class="floor-item">
+        <div class="floor-number">一层</div>
+        <div class="floor-name">时来风送 · 序之诞生</div>
+        <div class="floor-body">
+          <p>一层正厅设有汉白玉浮雕《时来风送滕王阁》，取材自明代冯梦龙《醒世恒言》中《马当神风送滕王阁》的故事，再现了当年王勃写序的传说。西厅设置模拟实景和仿真硅胶人物，生动再现"阎公重九宴宾·王勃作序"的场景。此外，南北两侧长廊分别设有《滕王阁诗词集锦》碑廊（99方历代诗词碑刻）和《滕王阁序印谱》碑廊（158枚印章组合而成），以及"压江""挹翠"两座四角重檐亭。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 页脚 -->
+<footer class="footer-section" id="footer">
+  <div class="footer-poem reveal">
+    阁中帝子今何在？<br>槛外长江空自流。
+  </div>
+  <div class="footer-info reveal">
+    <p>江西省南昌市东湖区仿古街58号</p>
+    <p>电话：(0791) 8670-2636</p>
+    <p>开放时间：08:00 - 18:00（夏季）/ 08:00 - 17:30（冬季）</p>
+    <p style="margin-top:16px;">
+      <a href="#">官方网站</a> · <a href="#">在线购票</a> · <a href="#">虚拟游览</a>
+    </p>
+  </div>
+  <button class="fly-letter-btn reveal">
+    <span class="bird-icon">🕊️</span>
+    <span>飞鸿传书 · 联系我们</span>
+  </button>
+  <div class="footer-copyright">
+    © 2026 滕王阁数字之境 · 设计构想
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
