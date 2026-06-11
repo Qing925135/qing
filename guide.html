@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>滕王阁 · 数字之境 — 伍·宴游指南</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;300;400;500;600;700;900&family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- 自定义光标 -->
+<div class="cursor-brush" id="cursorBrush"></div>
+
+<!-- 卷轴进度条 -->
+<div class="scroll-progress" id="scrollProgress">
+  <div class="knob" id="scrollKnob"></div>
+</div>
+
+<!-- 导航栏 -->
+<nav class="nav-capsule" id="navCapsule">
+  <a href="index.html" class="nav-brand">滕王阁</a>
+  <a href="culture.html" class="nav-link" data-section="culture">文化解码</a>
+  <a href="architecture.html" class="nav-link" data-section="architecture">神工天巧</a>
+  <a href="poetry.html" class="nav-link" data-section="poetry">文光射斗</a>
+  <a href="guide.html" class="nav-link active" data-section="guide">宴游指南</a>
+  <a href="map.html" class="nav-link" data-section="map">探访实录</a>
+  <button class="nav-theme-toggle" id="themeToggle" title="切换夜宴模式">🌙</button>
+</nav>
+
+<!-- 灯箱 -->
+<div class="lightbox-overlay" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">✕</button>
+  <img src="" alt="" id="lightboxImg">
+</div>
+
+<!-- 声音控制 -->
+<button class="sound-toggle muted" id="soundToggle" title="开启环境音">🔇</button>
+
+<!-- ====== 页面主体内容 ====== -->
+
+<!-- ============================================
+     伍 · 宴游指南（雅集服务）
+     ============================================ -->
+<section class="section guide" id="guide">
+  <div class="container">
+    <div class="guide-header reveal">
+      <h2 class="section-title">伍 · 宴游指南</h2>
+      <p class="section-subtitle">雅集请柬 · 赣鄱风物 · 食盒呈味</p>
+    </div>
+
+    <!-- 美食食盒 -->
+    <div class="food-section reveal">
+      <div class="food-section-title">
+        <h3 style="font-family:'ZCOOL XiaoWei',serif;font-size:24px;color:var(--text-primary);">赣鄱食盒 · 风味推荐</h3>
+        <p style="font-size:14px;color:var(--text-muted);margin-top:8px;">悬停展开，品读诗笺背后的故事</p>
+      </div>
+
+      <!-- 筛选标签 -->
+      <div class="filter-tags">
+        <button class="filter-tag active" data-filter="all">全部</button>
+        <button class="filter-tag" data-filter="food">特色美食</button>
+        <button class="filter-tag" data-filter="craft">手工艺品</button>
+        <button class="filter-tag" data-filter="architecture">建筑特色</button>
+      </div>
+
+      <div class="food-grid" id="foodGrid">
+        <div class="food-card reveal reveal-delay-1" data-category="food">
+            <div class="steam">
+              <div class="steam-line"></div>
+              <div class="steam-line"></div>
+              <div class="steam-line"></div>
+            </div>
+            <img src="images/food-banfen.jpg" alt="南昌拌粉" class="food-img" loading="lazy">
+          <div class="food-info">
+            <div class="food-name">南昌拌粉</div>
+            <div class="food-desc">南昌人的早餐灵魂，米粉爽滑劲道，配以秘制酱料、花生碎、萝卜干、辣椒油，拌匀后香气四溢。推荐前往胜利路步行街的老字号品尝。</div>
+            <div class="food-meta">
+              <span>📍 胜利路步行街</span>
+              <span class="food-price">¥8-15</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="food-card reveal reveal-delay-2" data-category="food">
+          <div class="steam">
+            <div class="steam-line"></div>
+            <div class="steam-line"></div>
+            <div class="steam-line"></div>
+          </div>
+          <img src="images/food-waguantang.jpg" alt="瓦罐煨汤" class="food-img" loading="lazy">
+          <div class="food-info">
+            <div class="food-name">瓦罐煨汤</div>
+            <div class="food-desc">南昌最具代表性的传统美食，以小型土质瓦罐为容器，文火慢煨七至八小时。汤品清澈鲜美，肉质酥烂入味，是赣菜文化的精华所在。</div>
+            <div class="food-meta">
+              <span>📍 绳金塔美食街</span>
+              <span class="food-price">¥25-45</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="food-card reveal reveal-delay-3" data-category="food">
+          <div class="steam">
+            <div class="steam-line"></div>
+            <div class="steam-line"></div>
+            <div class="steam-line"></div>
+          </div>
+          <img src="images/food-pijiu-duck.jpg" alt="赣味啤酒鸭" class="food-img" loading="lazy">
+          <div class="food-info">
+            <div class="food-name">赣味啤酒鸭</div>
+            <div class="food-desc">选用本地散养麻鸭，以啤酒代替水焖煮，加入干辣椒、姜蒜等调料。鸭肉紧实入味，汤汁浓郁醇厚，是南昌宴席上的经典硬菜。</div>
+            <div class="food-meta">
+              <span>📍 孺子路美食街</span>
+              <span class="food-price">¥58-88</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="food-card reveal reveal-delay-1" data-category="craft">
+          <img src="images/food-cibanhua.jpg" alt="南昌瓷板画" class="food-img" loading="lazy">
+          <div class="food-info">
+            <div class="food-name">南昌瓷板画</div>
+            <div class="food-desc">国家级非物质文化遗产，以白瓷板为载体，运用特制颜料绘制，经高温烧制而成。色彩鲜艳持久，题材丰富，是极具收藏价值的南昌特色艺术品。</div>
+            <div class="food-meta">
+              <span>📍 滕王阁景区内</span>
+              <span class="food-price">¥200-5000+</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="food-card reveal reveal-delay-2" data-category="craft">
+          <img src="images/food-lidujiu.jpg" alt="李渡烧酒" class="food-img" loading="lazy">
+          <div class="food-info">
+            <div class="food-name">李渡烧酒</div>
+            <div class="food-desc">进贤李渡镇特产，中国白酒的重要源头之一。李渡元代烧酒作坊遗址的发现，将中国蒸馏酒的历史推前了数百年。酒体醇厚绵柔，回味悠长。</div>
+            <div class="food-meta">
+              <span>📍 进贤县李渡镇</span>
+              <span class="food-price">¥50-300</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="food-card reveal reveal-delay-3" data-category="architecture">
+          <img src="images/food-shengjinta.jpg" alt="绳金塔" class="food-img" loading="lazy">
+          <div class="food-info">
+            <div class="food-name">绳金塔</div>
+            <div class="food-desc">南昌三大古迹之一，始建于唐天佑年间（904-907年），高50.86米。塔身砖木结构，七层八面，飞檐翘角，铜铃高悬。塔下美食街汇聚南昌各类小吃，是游客必访之地。</div>
+            <div class="food-meta">
+              <span>📍 绳金塔街</span>
+              <span class="food-price">免费</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 票务信息 -->
+    <div class="reveal" style="max-width:800px;margin:60px auto 0;">
+      <h3 style="font-family:'ZCOOL XiaoWei',serif;font-size:24px;color:var(--text-primary);text-align:center;margin-bottom:12px;">票务指南 · 购票须知</h3>
+      <p style="font-size:14px;color:var(--text-muted);text-align:center;margin-bottom:40px;">提前线上预订，刷身份证或二维码直接入园</p>
+    </div>
+    <div class="ticket-info-grid reveal" style="max-width:800px;margin:0 auto 0;">
+      <div class="ticket-info-card">
+        <div class="ticket-info-icon">🎫</div>
+        <h4>白天门票</h4>
+        <p>景区21:00停止入园前可订当日票，每个身份证每天限购1张。凭本人身份证或订单二维码刷闸机入园。</p>
+      </div>
+      <div class="ticket-info-card">
+        <div class="ticket-info-icon">🌙</div>
+        <h4>夜间演出</h4>
+        <p>滕王阁常态化演出《寻梦滕王阁》为大型沉浸式实景演出，需单独购票。建议提前通过官方渠道预订座位。</p>
+      </div>
+      <div class="ticket-info-card">
+        <div class="ticket-info-icon">🆓</div>
+        <h4>免票政策</h4>
+        <p>6周岁（含）或身高1.4米（含）以下儿童免费。65岁以上老人、现/退役军人、残疾人、记者凭有效证件免票。</p>
+      </div>
+      <div class="ticket-info-card">
+        <div class="ticket-info-icon">💳</div>
+        <h4>退改规则</h4>
+        <p>订单未使用7天内可申请原路退款，已取票的订单不支持退款。所有订单不支持改期，请合理安排行程。</p>
+      </div>
+    </div>
+
+    <!-- 实用贴士 -->
+    <div class="reveal" style="max-width:800px;margin:60px auto 0;">
+      <h3 style="font-family:'ZCOOL XiaoWei',serif;font-size:24px;color:var(--text-primary);text-align:center;margin-bottom:12px;">实用贴士 · 游览锦囊</h3>
+      <p style="font-size:14px;color:var(--text-muted);text-align:center;margin-bottom:40px;">让您的滕王阁之行更加顺畅</p>
+    </div>
+    <div class="tips-grid reveal" style="max-width:800px;margin:0 auto 0;">
+      <div class="tip-item">
+        <div class="tip-label">🕐 开放时间</div>
+        <div class="tip-content">夏季（4月-10月）08:00-18:00<br>冬季（11月-3月）08:00-17:30<br>夜间演出以当日公告为准</div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-label">🚇 交通指南</div>
+        <div class="tip-content">地铁1号线「万寿宫站」步行10分钟<br>公交2/7/8/12/26路至「滕王阁站」<br>自驾可导航至「滕王阁停车场」</div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-label">📞 咨询电话</div>
+        <div class="tip-content">咨询电话：0791-86702036<br>投诉电话：0791-86702055<br>救援电话：0791-86704236</div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-label">📱 官方公众号</div>
+        <div class="tip-content">微信公众号搜索「twg1989」<br>可在线购票、申请发票、查看活动<br>虚拟游览：720yun.com/t/1bdjO7uaek4</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 页脚 -->
+<footer class="footer-section" id="footer">
+  <div class="footer-poem reveal">
+    阁中帝子今何在？<br>槛外长江空自流。
+  </div>
+  <div class="footer-info reveal">
+    <p>江西省南昌市东湖区仿古街58号</p>
+    <p>电话：(0791) 8670-2636</p>
+    <p>开放时间：08:00 - 18:00（夏季）/ 08:00 - 17:30（冬季）</p>
+    <p style="margin-top:16px;">
+      <a href="#">官方网站</a> · <a href="#">在线购票</a> · <a href="#">虚拟游览</a>
+    </p>
+  </div>
+  <button class="fly-letter-btn reveal">
+    <span class="bird-icon">🕊️</span>
+    <span>飞鸿传书 · 联系我们</span>
+  </button>
+  <div class="footer-copyright">
+    © 2026 滕王阁数字之境 · 设计构想
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
