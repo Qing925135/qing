@@ -1,0 +1,2183 @@
+/* ============================================
+   滕王阁数字之境 · 全局样式
+   ============================================ */
+
+/* --- CSS 变量 / 设计令牌 --- */
+:root {
+  /* 底色 */
+  --bg-xuanzhi: #F5EFE6;
+  --bg-xuanzhi-dark: #E8E0D0;
+  /* 主色系 - 春·青绿 */
+  --mountain-dai: #7BA587;
+  --gold-leaf: #C4A265;
+  --gold-bright: #D4AF37;
+  /* 秋·烟霞 */
+  --twilight-purple: #5B4B6A;
+  --sunset-orange: #E28E5E;
+  /* 点睛色 */
+  --vermilion: #B5433A;
+  --vermilion-light: #D4564D;
+  /* 深色模式 */
+  --ink-black: #1A1C1E;
+  --ink-dark: #2A2C2E;
+  --ink-gold: #D4AF37;
+  --ink-jade: #7BA587;
+  /* 文字 */
+  --text-primary: #2C2417;
+  --text-secondary: #5A4E3C;
+  --text-muted: #8A7E6C;
+  /* 间距 */
+  --section-padding: 120px 0;
+  --container-width: 1200px;
+  /* 过渡 */
+  --transition-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* --- 深色模式（夜宴主题） --- */
+[data-theme="night"] {
+  --bg-xuanzhi: #1A1C1E;
+  --bg-xuanzhi-dark: #141618;
+  --text-primary: #E8E0D0;
+  --text-secondary: #B8AE9C;
+  --text-muted: #7A7060;
+  --mountain-dai: #8FBF9A;
+  --gold-leaf: #D4AF37;
+  --twilight-purple: #7B6B8A;
+  --sunset-orange: #F2A07E;
+}
+
+/* --- 基础重置 --- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-leaf) var(--bg-xuanzhi);
+}
+
+body {
+  font-family: 'Noto Serif SC', 'Songti SC', serif;
+  background-color: var(--bg-xuanzhi);
+  color: var(--text-primary);
+  line-height: 1.8;
+  letter-spacing: 0.05em;
+  overflow-x: hidden;
+  cursor: none;
+  transition: background-color 0.8s ease, color 0.8s ease;
+}
+
+/* 宣纸纹理背景 */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* --- 自定义光标（毛笔笔触） --- */
+.cursor-brush {
+  position: fixed;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--text-secondary);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transition: transform 0.15s ease, opacity 0.3s ease, background-color 0.2s ease;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: multiply;
+  opacity: 0.7;
+}
+
+.cursor-brush.hover {
+  transform: translate(-50%, -50%) scale(0.6);
+  background-color: var(--text-primary);
+  opacity: 1;
+}
+
+.cursor-brush.click {
+  transform: translate(-50%, -50%) scale(2);
+  opacity: 0;
+}
+
+[data-theme="night"] .cursor-brush {
+  border-color: var(--gold-leaf);
+  mix-blend-mode: screen;
+}
+
+[data-theme="night"] .cursor-brush.hover {
+  background-color: var(--gold-leaf);
+}
+
+/* --- 卷轴进度条 --- */
+.scroll-progress {
+  position: fixed;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 200px;
+  background: rgba(0,0,0,0.08);
+  border-radius: 2px;
+  z-index: 999;
+  overflow: hidden;
+}
+
+.scroll-progress::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: linear-gradient(to bottom, var(--gold-leaf), var(--vermilion));
+  border-radius: 2px;
+  transition: height 0.1s linear;
+}
+
+.scroll-progress .knob {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background: var(--gold-leaf);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(212,175,55,0.4);
+  transition: top 0.1s linear;
+}
+
+[data-theme="night"] .scroll-progress {
+  background: rgba(255,255,255,0.06);
+}
+
+/* --- 导航栏（水墨笔触胶囊） --- */
+.nav-capsule {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 24px;
+  background: rgba(245, 239, 230, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 50px;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+  transition: all 0.5s var(--transition-smooth);
+}
+
+[data-theme="night"] .nav-capsule {
+  background: rgba(26, 28, 30, 0.85);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+
+.nav-capsule.scrolled {
+  padding: 6px 20px;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+}
+
+.nav-brand {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 18px;
+  color: var(--text-primary);
+  text-decoration: none;
+  margin-right: 16px;
+  white-space: nowrap;
+}
+
+.nav-link {
+  position: relative;
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 20px;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, var(--gold-leaf), transparent);
+  transition: transform 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--text-primary);
+}
+
+.nav-link.active::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+.nav-theme-toggle {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: none;
+  cursor: none;
+  font-size: 16px;
+  color: var(--text-secondary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  margin-left: 8px;
+}
+
+.nav-theme-toggle:hover {
+  background: rgba(0,0,0,0.05);
+  color: var(--gold-leaf);
+}
+
+/* --- 容器 --- */
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* --- 板块通用样式 --- */
+.section {
+  position: relative;
+  padding: var(--section-padding);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.section-title {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: clamp(32px, 5vw, 56px);
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold-leaf), transparent);
+}
+
+.section-subtitle {
+  font-size: 16px;
+  color: var(--text-muted);
+  letter-spacing: 0.2em;
+  margin-bottom: 60px;
+}
+
+/* --- 滚动入场动画 --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.15s; }
+.reveal-delay-2 { transition-delay: 0.3s; }
+.reveal-delay-3 { transition-delay: 0.45s; }
+.reveal-delay-4 { transition-delay: 0.6s; }
+
+/* ============================================
+   壹 · 豫章故郡（首屏沉浸场）
+   ============================================ */
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: url('images/hero-nightview.jpg') center/cover no-repeat;
+  z-index: 0;
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,0.3) 0%,
+    rgba(0,0,0,0.1) 40%,
+    rgba(0,0,0,0.4) 100%
+  );
+}
+
+[data-theme="night"] .hero-bg::after {
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,0.5) 0%,
+    rgba(0,0,0,0.2) 40%,
+    rgba(0,0,0,0.6) 100%
+  );
+}
+
+/* 水墨粒子画布 */
+#hero-canvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
+}
+
+/* 首屏竖排文字 */
+.hero-text {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #F5EFE6;
+}
+
+.hero-title {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: clamp(60px, 12vw, 140px);
+  letter-spacing: 0.15em;
+  text-shadow: 0 4px 30px rgba(0,0,0,0.5), 0 0 60px rgba(0,0,0,0.2);
+  line-height: 1.2;
+  margin-bottom: 30px;
+  opacity: 0;
+  animation: heroTitleIn 1.2s 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes heroTitleIn {
+  from { opacity: 0; transform: translateY(30px) scale(0.95); letter-spacing: 0.4em; }
+  to { opacity: 1; transform: translateY(0) scale(1); letter-spacing: 0.15em; }
+}
+
+.hero-subtitle {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: clamp(22px, 4vw, 42px);
+  letter-spacing: 0.35em;
+  color: rgba(245, 239, 230, 0.85);
+  text-shadow: 0 2px 15px rgba(0,0,0,0.4);
+  opacity: 0;
+  animation: fadeInChar 1s 1.2s forwards;
+}
+
+.hero-divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold-leaf), transparent);
+  margin: 24px auto;
+  opacity: 0;
+  animation: fadeInChar 0.8s 1.6s forwards;
+}
+
+.hero-slogan {
+  margin-top: 10px;
+  font-size: clamp(13px, 1.8vw, 16px);
+  color: rgba(245, 239, 230, 0.5);
+  letter-spacing: 0.5em;
+  animation: fadeInChar 1s 2s forwards;
+  opacity: 0;
+}
+
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  color: rgba(245, 239, 230, 0.5);
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  animation: floatUpDown 2s infinite;
+}
+
+@keyframes fadeInChar {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-scroll-hint::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(245,239,230,0.5), transparent);
+  margin: 12px auto 0;
+}
+
+@keyframes floatUpDown {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-10px); }
+}
+
+/* 飞鸟动画 */
+.birds {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.bird {
+  position: absolute;
+  width: 20px;
+  height: 4px;
+  background: rgba(245, 239, 230, 0.3);
+  border-radius: 50%;
+  animation: flyBird linear infinite;
+}
+
+.bird::before, .bird::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 2px;
+  background: rgba(245, 239, 230, 0.3);
+  border-radius: 50%;
+  top: -2px;
+}
+
+.bird::before { left: -8px; transform: rotate(-20deg); }
+.bird::after { right: -8px; transform: rotate(20deg); }
+
+@keyframes flyBird {
+  0% { transform: translate(-100px, 0) scale(1); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translate(calc(100vw + 100px), -100px) scale(0.6); opacity: 0; }
+}
+
+/* ============================================
+   贰 · 神工天巧（建筑解构馆）
+   ============================================ */
+.architecture {
+  background: var(--bg-xuanzhi);
+}
+
+.arch-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.arch-blueprint-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto 80px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  background: var(--bg-xuanzhi);
+  border: 1px solid rgba(196,162,101,0.15);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+.arch-blueprint-img {
+  width: 100%;
+  display: block;
+  object-fit: contain;
+  background: #F0E8D8;
+}
+
+.arch-blueprint-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: rgba(196,162,101,0.08);
+  border-top: 1px solid rgba(196,162,101,0.12);
+}
+
+.arch-blueprint-caption .bp-title {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 16px;
+  color: var(--text-primary);
+}
+
+.arch-blueprint-caption .bp-source {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* 建筑结构卡片 */
+.arch-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-bottom: 80px;
+}
+
+.arch-card {
+  background: rgba(255,255,255,0.5);
+  border: 1px solid rgba(196,162,101,0.15);
+  border-radius: 12px;
+  padding: 32px;
+  transition: all 0.4s var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+[data-theme="night"] .arch-card {
+  background: rgba(255,255,255,0.03);
+  border-color: rgba(212,175,55,0.1);
+}
+
+.arch-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+  border-color: var(--gold-leaf);
+}
+
+.arch-card .card-icon {
+  font-size: 36px;
+  margin-bottom: 16px;
+}
+
+.arch-card h3 {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.arch-card p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+/* ===== 全幅视差横幅 ===== */
+.section-parallax {
+  position: relative;
+  height: 50vh;
+  min-height: 360px;
+  max-height: 560px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-parallax .parallax-bg {
+  position: absolute;
+  inset: -60px 0;
+  background-size: cover;
+  background-position: center 40%;
+  background-repeat: no-repeat;
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+
+/* 暖色渐变遮罩（火烧云横幅） */
+.parallax-overlay--warm {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(45,35,28,0.25) 0%,
+    rgba(45,35,28,0.10) 40%,
+    rgba(45,35,28,0.45) 100%
+  );
+  pointer-events: none;
+}
+
+/* 水墨渐变遮罩（水墨画横幅） */
+.parallax-overlay--ink {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(245,240,230,0.30) 0%,
+    rgba(245,240,230,0.08) 35%,
+    rgba(245,240,230,0.50) 100%
+  );
+  pointer-events: none;
+}
+
+[data-theme="night"] .parallax-overlay--warm {
+  background: linear-gradient(
+    180deg,
+    rgba(15,12,20,0.40) 0%,
+    rgba(15,12,20,0.15) 40%,
+    rgba(15,12,20,0.60) 100%
+  );
+}
+
+[data-theme="night"] .parallax-overlay--ink {
+  background: linear-gradient(
+    180deg,
+    rgba(15,12,20,0.45) 0%,
+    rgba(15,12,20,0.15) 35%,
+    rgba(15,12,20,0.65) 100%
+  );
+}
+
+.parallax-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 24px;
+}
+
+.parallax-quote {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: clamp(22px, 4vw, 42px);
+  color: #fff;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.5), 0 0 60px rgba(0,0,0,0.2);
+  letter-spacing: 0.15em;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: parallaxQuoteIn 1.2s ease forwards;
+  animation-play-state: paused;
+}
+
+.section-parallax.in-view .parallax-quote {
+  animation-play-state: running;
+}
+
+@keyframes parallaxQuoteIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 横幅上下丝滑衔接：与相邻版块无缝过渡 */
+.section-parallax::before,
+.section-parallax::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 80px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.section-parallax::before {
+  top: 0;
+  background: linear-gradient(180deg, var(--bg-primary) 0%, transparent 100%);
+}
+
+.section-parallax::after {
+  bottom: 0;
+  background: linear-gradient(0deg, var(--bg-primary) 0%, transparent 100%);
+}
+
+/* 千年重楼时间轴 */
+.timeline-section {
+  margin-top: 60px;
+}
+
+.timeline-title {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.timeline-swiper {
+  overflow: hidden;
+  padding: 20px 0;
+}
+
+.timeline-swiper .swiper-wrapper {
+  transition-timing-function: var(--transition-smooth);
+}
+
+.timeline-slide {
+  width: 300px;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.timeline-era {
+  position: relative;
+  background: rgba(255,255,255,0.4);
+  border: 1px solid rgba(196,162,101,0.12);
+  border-radius: 12px;
+  padding: 30px 24px;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s ease;
+}
+
+[data-theme="night"] .timeline-era {
+  background: rgba(255,255,255,0.03);
+}
+
+.timeline-era:hover {
+  transform: translateY(-6px);
+  border-color: var(--gold-leaf);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+}
+
+.timeline-era .dynasty {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 28px;
+  color: var(--gold-leaf);
+  margin-bottom: 8px;
+}
+
+.timeline-era .year {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.timeline-era .description {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.timeline-era .seal {
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--vermilion);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 14px;
+  color: var(--vermilion);
+  margin-top: 16px;
+  transform: rotate(-5deg);
+}
+
+/* ============================================
+   叁 · 文光射斗（诗赋光影廊）
+   ============================================ */
+.poetry {
+  background: linear-gradient(180deg, var(--bg-xuanzhi) 0%, var(--bg-xuanzhi-dark) 100%);
+  min-height: auto;
+  padding-bottom: 80px;
+}
+
+.poetry-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+/* 名句展示 */
+.quote-showcase {
+  position: relative;
+  padding: 80px 40px;
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.quote-showcase .big-quote {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: clamp(24px, 4vw, 42px);
+  color: var(--text-primary);
+  line-height: 1.6;
+  position: relative;
+  display: inline-block;
+}
+
+.quote-showcase .big-quote .highlight {
+  color: var(--gold-leaf);
+  position: relative;
+}
+
+.quote-showcase .big-quote .highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--gold-leaf);
+  opacity: 0.3;
+}
+
+.quote-showcase .modern-translation {
+  margin-top: 30px;
+  font-size: 15px;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 2;
+}
+
+/* 朱砂句读 */
+.punctuation-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: var(--vermilion);
+  border-radius: 50%;
+  margin: 0 4px;
+  vertical-align: middle;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.quote-showcase:hover .punctuation-dot {
+  opacity: 1;
+}
+
+/* 诗笺墙 */
+.poem-wall {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: 80px;
+}
+
+.poem-card {
+  perspective: 800px;
+  height: 320px;
+}
+
+.poem-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s var(--transition-smooth);
+  transform-style: preserve-3d;
+}
+
+.poem-card:hover .poem-card-inner {
+  transform: rotateY(180deg);
+}
+
+.poem-card-front, .poem-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 8px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.poem-card-front {
+  background: linear-gradient(135deg, #F8F3EA, #EDE5D8);
+  border: 1px solid rgba(196,162,101,0.2);
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.05);
+}
+
+[data-theme="night"] .poem-card-front {
+  background: linear-gradient(135deg, #2A2C2E, #222426);
+  border-color: rgba(212,175,55,0.1);
+}
+
+.poem-card-front .poem-text {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 20px;
+  color: var(--text-primary);
+  line-height: 2;
+  writing-mode: vertical-rl;
+  align-self: center;
+  height: 100%;
+  padding: 10px;
+}
+
+.poem-card-front .poem-author {
+  position: absolute;
+  bottom: 20px;
+  right: 24px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.poem-card-back {
+  background: linear-gradient(135deg, var(--mountain-dai), #5A8A6A);
+  color: #F5EFE6;
+  transform: rotateY(180deg);
+  padding: 30px;
+}
+
+.poem-card-back h4 {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.poem-card-back p {
+  font-size: 13px;
+  line-height: 1.8;
+  opacity: 0.9;
+}
+
+/* 图片画廊（卷轴横滚） */
+.gallery-scroll {
+  position: relative;
+  overflow: hidden;
+  padding: 40px 0;
+}
+
+.gallery-scroll-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.gallery-track {
+  display: flex;
+  gap: 24px;
+  padding: 20px 40px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.gallery-track::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-item {
+  flex-shrink: 0;
+  width: 360px;
+  scroll-snap-align: start;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  background: var(--bg-xuanzhi-dark);
+  border: 1px solid rgba(196,162,101,0.12);
+  transition: transform 0.4s ease;
+}
+
+.gallery-item:hover {
+  transform: scale(1.02);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-item .gallery-caption {
+  padding: 20px;
+}
+
+.gallery-item .gallery-caption h4 {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.gallery-item .gallery-caption p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+/* 卷轴装饰 */
+.scroll-ornament {
+  width: 40px;
+  height: 100%;
+  background: linear-gradient(180deg, #8B6914, #C4A265, #8B6914);
+  border-radius: 20px;
+  flex-shrink: 0;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+}
+
+/* ============================================
+   肆 · 宴游指南（雅集服务）
+   ============================================ */
+.guide {
+  background: var(--bg-xuanzhi);
+}
+
+.guide-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+/* 门票翻转卡片 */
+.ticket-flip {
+  perspective: 1000px;
+  width: 360px;
+  height: 220px;
+  margin: 0 auto 60px;
+  cursor: none;
+}
+
+.ticket-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s var(--transition-smooth);
+  transform-style: preserve-3d;
+}
+
+.ticket-flip.flipped .ticket-inner {
+  transform: rotateY(180deg);
+}
+
+.ticket-front, .ticket-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.ticket-front {
+  background: url('images/ticket-front.jpg') center/cover no-repeat;
+  background-color: rgba(91, 75, 106, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #F5EFE6;
+  padding: 30px;
+  text-align: center;
+  position: relative;
+}
+
+.ticket-front::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  background: linear-gradient(135deg, rgba(91, 75, 106, 0.7), rgba(226, 142, 94, 0.5));
+  z-index: 0;
+}
+
+.ticket-front .ticket-title {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 28px;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.ticket-front .ticket-subtitle {
+  font-size: 13px;
+  opacity: 0.9;
+  letter-spacing: 0.2em;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.ticket-front .ticket-pavilion {
+  font-size: 60px;
+  margin: 16px 0;
+  opacity: 0.9;
+  position: relative;
+  z-index: 1;
+}
+
+.ticket-front .ticket-hint {
+  font-size: 12px;
+  opacity: 0.7;
+  letter-spacing: 0.1em;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.ticket-back {
+  background: var(--bg-xuanzhi);
+  border: 2px solid var(--gold-leaf);
+  transform: rotateY(180deg);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.ticket-back .price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.ticket-back .price {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 36px;
+  color: var(--vermilion);
+}
+
+.ticket-back .price-unit {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.ticket-back .ticket-info {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  line-height: 1.8;
+}
+
+.ticket-back .cta-button {
+  display: inline-block;
+  padding: 10px 32px;
+  background: var(--vermilion);
+  color: #F5EFE6;
+  border: none;
+  border-radius: 6px;
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 15px;
+  cursor: none;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.ticket-back .cta-button:hover {
+  background: var(--vermilion-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(181,67,58,0.3);
+}
+
+/* 美食食盒网格 */
+.food-section {
+  margin-top: 80px;
+}
+
+.food-section-title {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.food-card {
+  background: rgba(255,255,255,0.5);
+  border: 1px solid rgba(196,162,101,0.12);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.4s var(--transition-smooth);
+  position: relative;
+}
+
+[data-theme="night"] .food-card {
+  background: rgba(255,255,255,0.03);
+}
+
+.food-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+}
+
+.food-card .food-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  background: linear-gradient(135deg, rgba(123,165,135,0.2), rgba(196,162,101,0.2));
+}
+
+.food-card .food-info {
+  padding: 20px;
+}
+
+.food-card .food-name {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 18px;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.food-card .food-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.food-card .food-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.food-card .food-price {
+  color: var(--vermilion);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* 蒸汽动画 */
+.food-card .steam {
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 80px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.food-card:hover .steam {
+  opacity: 1;
+}
+
+.steam-line {
+  position: absolute;
+  width: 2px;
+  height: 30px;
+  background: rgba(255,255,255,0.4);
+  border-radius: 1px;
+  animation: steamRise 2s infinite;
+}
+
+.steam-line:nth-child(1) { left: 15px; animation-delay: 0s; }
+.steam-line:nth-child(2) { left: 30px; animation-delay: 0.5s; }
+.steam-line:nth-child(3) { left: 45px; animation-delay: 1s; }
+
+@keyframes steamRise {
+  0% { transform: translateY(0) scaleY(1); opacity: 0; }
+  50% { opacity: 0.6; }
+  100% { transform: translateY(-40px) scaleY(1.5); opacity: 0; }
+}
+
+/* ============================================
+   伍 · 落霞归处（页尾余韵）
+   ============================================ */
+.footer-section {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 40px 60px;
+  background: linear-gradient(180deg, var(--bg-xuanzhi) 0%, var(--bg-xuanzhi-dark) 50%, var(--ink-black) 100%);
+  overflow: hidden;
+}
+
+.footer-poem {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: clamp(20px, 3vw, 32px);
+  color: var(--text-secondary);
+  line-height: 2;
+  margin-bottom: 60px;
+  transition: color 0.8s ease;
+}
+
+.footer-section .footer-info {
+  color: rgba(245,239,230,0.4);
+  font-size: 13px;
+  line-height: 2.2;
+  letter-spacing: 0.1em;
+}
+
+.footer-section .footer-info a {
+  color: rgba(245,239,230,0.5);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section .footer-info a:hover {
+  color: var(--gold-leaf);
+}
+
+/* 飞鸿传书按钮 */
+.fly-letter-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 36px;
+  margin-top: 40px;
+  background: transparent;
+  border: 1px solid rgba(245,239,230,0.2);
+  color: rgba(245,239,230,0.6);
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 15px;
+  border-radius: 50px;
+  cursor: none;
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+.fly-letter-btn:hover {
+  border-color: var(--gold-leaf);
+  color: var(--gold-leaf);
+  box-shadow: 0 0 30px rgba(212,175,55,0.15);
+}
+
+.fly-letter-btn .bird-icon {
+  transition: transform 0.4s ease;
+}
+
+.fly-letter-btn:hover .bird-icon {
+  transform: translateX(4px) translateY(-4px);
+}
+
+.footer-copyright {
+  margin-top: 60px;
+  font-size: 12px;
+  color: rgba(245,239,230,0.2);
+  letter-spacing: 0.1em;
+}
+
+/* ============================================
+   互动地图板块
+   ============================================ */
+.map-section {
+  background: var(--bg-xuanzhi);
+  padding: 120px 0;
+}
+
+.map-container {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(196,162,101,0.15);
+  background: rgba(255,255,255,0.3);
+}
+
+[data-theme="night"] .map-container {
+  background: rgba(255,255,255,0.03);
+  border-color: rgba(212,175,55,0.1);
+}
+
+.map-static {
+  width: 100%;
+  height: auto;
+  min-height: 400px;
+  position: relative;
+  background: var(--bg-xuanzhi);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: none;
+  transition: transform 0.3s ease;
+}
+
+.map-static:hover {
+  transform: scale(1.005);
+}
+
+.map-static img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.map-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 16px 24px;
+  background: rgba(196,162,101,0.08);
+  border-top: 1px solid rgba(196,162,101,0.12);
+}
+
+.map-caption .map-caption-title {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 16px;
+  color: var(--text-primary);
+}
+
+.map-caption .map-caption-hint {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* --- 地图标点系统 --- */
+.map-img-wrapper {
+  position: relative;
+  width: 100%;
+  line-height: 0;
+}
+
+.map-pins-layer {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.map-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+  cursor: none;
+  z-index: 5;
+}
+
+.marker-dot {
+  width: 28px;
+  height: 28px;
+  background: var(--vermilion);
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  box-shadow: 0 2px 8px rgba(181,67,58,0.4);
+  transition: all 0.3s var(--transition-bounce);
+  position: relative;
+}
+
+.marker-dot::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #F5EFE6;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.marker-dot::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid rgba(181,67,58,0.3);
+  animation: markerPulse 2s infinite;
+}
+
+@keyframes markerPulse {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1.8); opacity: 0; }
+}
+
+.gate-dot {
+  width: 22px;
+  height: 22px;
+  background: var(--gold-leaf);
+  box-shadow: 0 2px 8px rgba(196,162,101,0.4);
+}
+
+.gate-dot::after {
+  width: 8px;
+  height: 8px;
+}
+
+.gate-dot::before {
+  width: 30px;
+  height: 30px;
+  border-color: rgba(196,162,101,0.3);
+}
+
+.marker-label {
+  position: absolute;
+  top: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  font-family: 'Noto Serif SC', serif;
+  color: var(--text-primary);
+  white-space: nowrap;
+  background: rgba(245,239,230,0.9);
+  padding: 2px 8px;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+[data-theme="night"] .marker-label {
+  background: rgba(26,28,30,0.9);
+  color: #E8E0D0;
+}
+
+.map-marker:hover .marker-label,
+.map-marker.active .marker-label {
+  opacity: 1;
+}
+
+.marker-popup {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: rgba(245,239,230,0.97);
+  border: 1px solid var(--gold-leaf);
+  border-radius: 10px;
+  padding: 16px 20px;
+  min-width: 220px;
+  max-width: 280px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.35s var(--transition-smooth);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  z-index: 10;
+  backdrop-filter: blur(10px);
+}
+
+[data-theme="night"] .marker-popup {
+  background: rgba(26,28,30,0.97);
+  color: #E8E0D0;
+}
+
+.marker-popup::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 12px;
+  height: 12px;
+  background: rgba(245,239,230,0.97);
+  border-right: 1px solid var(--gold-leaf);
+  border-bottom: 1px solid var(--gold-leaf);
+}
+
+[data-theme="night"] .marker-popup::after {
+  background: rgba(26,28,30,0.97);
+}
+
+.map-marker:hover .marker-popup,
+.map-marker.active .marker-popup {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.map-marker:hover .marker-dot {
+  transform: rotate(-45deg) scale(1.15);
+}
+
+.marker-popup h4 {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 15px;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.marker-popup p {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* 标点入场动画 */
+.map-marker {
+  opacity: 0;
+  animation: markerAppear 0.5s forwards;
+}
+
+.map-marker:nth-child(1) { animation-delay: 0.1s; }
+.map-marker:nth-child(2) { animation-delay: 0.2s; }
+.map-marker:nth-child(3) { animation-delay: 0.3s; }
+.map-marker:nth-child(4) { animation-delay: 0.4s; }
+.map-marker:nth-child(5) { animation-delay: 0.5s; }
+.map-marker:nth-child(6) { animation-delay: 0.6s; }
+.map-marker:nth-child(7) { animation-delay: 0.7s; }
+.map-marker:nth-child(8) { animation-delay: 0.8s; }
+
+@keyframes markerAppear {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .marker-popup {
+    min-width: 180px;
+    max-width: 220px;
+    padding: 12px 16px;
+  }
+  .marker-dot {
+    width: 22px;
+    height: 22px;
+  }
+  .gate-dot {
+    width: 18px;
+    height: 18px;
+  }
+  .marker-label {
+    font-size: 10px;
+    top: -28px;
+  }
+}
+
+/* ============================================
+   文化解码板块
+   ============================================ */
+.culture {
+  background: var(--bg-xuanzhi);
+}
+
+.culture-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.knowledge-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  margin-bottom: 80px;
+}
+
+.knowledge-card {
+  background: rgba(255,255,255,0.4);
+  border: 1px solid rgba(196,162,101,0.1);
+  border-radius: 12px;
+  padding: 36px;
+  transition: all 0.4s var(--transition-smooth);
+  position: relative;
+}
+
+[data-theme="night"] .knowledge-card {
+  background: rgba(255,255,255,0.03);
+}
+
+.knowledge-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+  border-color: var(--gold-leaf);
+}
+
+.knowledge-card .kc-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  background: rgba(123,165,135,0.15);
+  color: var(--mountain-dai);
+  border-radius: 4px;
+  font-size: 12px;
+  margin-bottom: 16px;
+}
+
+.knowledge-card h3 {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 20px;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.knowledge-card p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.9;
+}
+
+.knowledge-card .kc-source {
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--text-muted);
+  border-top: 1px solid rgba(0,0,0,0.05);
+  padding-top: 12px;
+}
+
+/* ============================================
+   灯箱效果
+   ============================================ */
+.lightbox-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.lightbox-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+
+.lightbox-overlay img {
+  max-width: 90%;
+  max-height: 85vh;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 20px;
+  cursor: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+
+.lightbox-close:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+/* ============================================
+   响应式设计
+   ============================================ */
+@media (max-width: 768px) {
+  :root {
+    --section-padding: 80px 0;
+  }
+
+  .container {
+    padding: 0 20px;
+  }
+
+  body {
+    cursor: auto;
+  }
+
+  .cursor-brush {
+    display: none;
+  }
+
+  .nav-capsule {
+    top: 16px;
+    padding: 6px 16px;
+    gap: 4px;
+  }
+
+  .nav-brand {
+    font-size: 15px;
+    margin-right: 8px;
+  }
+
+  .nav-link {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+
+  .hero-title {
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+  }
+
+  .hero-subtitle {
+    letter-spacing: 0.2em;
+    font-size: clamp(18px, 5vw, 28px);
+  }
+
+  .scroll-progress {
+    display: none;
+  }
+
+  .timeline-slide {
+    width: 260px;
+  }
+
+  .poem-card {
+    height: 280px;
+  }
+
+  .gallery-item {
+    width: 300px;
+  }
+
+  .ticket-flip {
+    width: 300px;
+    height: 190px;
+  }
+
+  .map-static {
+    height: 350px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-capsule {
+    flex-wrap: wrap;
+    border-radius: 16px;
+    max-width: 90%;
+    justify-content: center;
+  }
+
+  .arch-cards,
+  .knowledge-cards,
+  .food-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- 懒加载占位 --- */
+.lazy-img {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.lazy-img.loaded {
+  opacity: 1;
+}
+
+/* --- 筛选标签 --- */
+.filter-tags {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.filter-tag {
+  padding: 6px 20px;
+  border: 1px solid rgba(196,162,101,0.2);
+  border-radius: 20px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: 'Noto Serif SC', serif;
+  font-size: 13px;
+  cursor: none;
+  transition: all 0.3s ease;
+}
+
+.filter-tag:hover,
+.filter-tag.active {
+  background: var(--gold-leaf);
+  color: #F5EFE6;
+  border-color: var(--gold-leaf);
+}
+
+/* --- 折叠面板 --- */
+.accordion-item {
+  border: 1px solid rgba(196,162,101,0.12);
+  border-radius: 8px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.3);
+  transition: all 0.3s ease;
+}
+
+[data-theme="night"] .accordion-item {
+  background: rgba(255,255,255,0.03);
+}
+
+.accordion-item:hover {
+  border-color: rgba(196,162,101,0.3);
+}
+
+.accordion-header {
+  padding: 18px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: none;
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 16px;
+  color: var(--text-primary);
+  transition: background 0.3s ease;
+}
+
+.accordion-header:hover {
+  background: rgba(196,162,101,0.05);
+}
+
+.accordion-header .arrow {
+  transition: transform 0.3s ease;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.accordion-item.open .accordion-header .arrow {
+  transform: rotate(180deg);
+}
+
+.accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s var(--transition-smooth);
+}
+
+.accordion-body-inner {
+  padding: 0 24px 20px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.9;
+}
+
+/* --- 声音控制 --- */
+.sound-toggle {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(245,239,230,0.9);
+  border: 1px solid rgba(196,162,101,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: none;
+  z-index: 999;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+[data-theme="night"] .sound-toggle {
+  background: rgba(26,28,30,0.9);
+}
+
+.sound-toggle:hover {
+  border-color: var(--gold-leaf);
+  transform: scale(1.1);
+}
+
+.sound-toggle.muted {
+  opacity: 0.5;
+}
+
+/* ============================================
+   新增板块样式
+   ============================================ */
+
+/* --- 阁内各层导览（手风琴式） --- */
+.floor-guide {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.floor-item {
+  border-bottom: 1px solid var(--bg-xuanzhi-dark);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.floor-item:hover {
+  background-color: rgba(212, 175, 55, 0.05);
+}
+
+.floor-item:first-child {
+  border-top: 1px solid var(--bg-xuanzhi-dark);
+}
+
+.floor-number,
+.floor-name {
+  display: inline-block;
+  padding: 16px 0;
+  vertical-align: middle;
+}
+
+.floor-number {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 20px;
+  color: var(--gold-leaf);
+  width: 60px;
+  flex-shrink: 0;
+}
+
+.floor-name {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 16px;
+  color: var(--text-primary);
+}
+
+.floor-item {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.floor-body {
+  width: 100%;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  padding: 0 0 0 60px;
+}
+
+.floor-item.open .floor-body {
+  max-height: 300px;
+  padding: 0 0 16px 60px;
+}
+
+.floor-body p {
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--text-secondary);
+}
+
+/* --- 楹联匾额卡片 --- */
+.couplet-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+}
+
+.couplet-card {
+  background: var(--bg-xuanzhi-dark);
+  border-radius: 12px;
+  padding: 24px;
+  border-left: 3px solid var(--gold-leaf);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.couplet-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+}
+
+.couplet-text {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 20px;
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin-bottom: 12px;
+  letter-spacing: 0.08em;
+}
+
+.couplet-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+/* --- 票务信息卡片 --- */
+.ticket-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+}
+
+.ticket-info-card {
+  background: var(--bg-xuanzhi-dark);
+  border-radius: 12px;
+  padding: 28px 24px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ticket-info-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+}
+
+.ticket-info-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.ticket-info-card h4 {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 18px;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.ticket-info-card p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+/* --- 实用贴士 --- */
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+}
+
+.tip-item {
+  background: var(--bg-xuanzhi-dark);
+  border-radius: 12px;
+  padding: 24px;
+  transition: transform 0.3s ease;
+}
+
+.tip-item:hover {
+  transform: translateY(-2px);
+}
+
+.tip-label {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 16px;
+  color: var(--gold-leaf);
+  margin-bottom: 10px;
+}
+
+.tip-content {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 2;
+}
+
+/* --- 响应式适配 --- */
+@media (max-width: 768px) {
+  .couplet-gallery,
+  .ticket-info-grid,
+  .tips-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .floor-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .floor-body {
+    padding-left: 0;
+  }
+
+  .floor-item.open .floor-body {
+    padding-left: 0;
+  }
+}
