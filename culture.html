@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>滕王阁 · 数字之境 — 贰·文化解码</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;300;400;500;600;700;900&family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- 自定义光标 -->
+<div class="cursor-brush" id="cursorBrush"></div>
+
+<!-- 卷轴进度条 -->
+<div class="scroll-progress" id="scrollProgress">
+  <div class="knob" id="scrollKnob"></div>
+</div>
+
+<!-- 导航栏 -->
+<nav class="nav-capsule" id="navCapsule">
+  <a href="index.html" class="nav-brand">滕王阁</a>
+  <a href="culture.html" class="nav-link active" data-section="culture">文化解码</a>
+  <a href="architecture.html" class="nav-link" data-section="architecture">神工天巧</a>
+  <a href="poetry.html" class="nav-link" data-section="poetry">文光射斗</a>
+  <a href="guide.html" class="nav-link" data-section="guide">宴游指南</a>
+  <a href="map.html" class="nav-link" data-section="map">探访实录</a>
+  <button class="nav-theme-toggle" id="themeToggle" title="切换夜宴模式">🌙</button>
+</nav>
+
+<!-- 灯箱 -->
+<div class="lightbox-overlay" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">✕</button>
+  <img src="" alt="" id="lightboxImg">
+</div>
+
+<!-- 声音控制 -->
+<button class="sound-toggle muted" id="soundToggle" title="开启环境音">🔇</button>
+
+<!-- ====== 页面主体内容 ====== -->
+
+<!-- 文化解码 · 全幅背景横幅 -->
+<div class="section-parallax" data-speed="0.3">
+  <div class="parallax-bg" style="background-image:url('images/bg-sunset-city.png')"></div>
+  <div class="parallax-overlay parallax-overlay--warm"></div>
+  <div class="parallax-content">
+    <p class="parallax-quote">阁以文传 · 千年文脉 · 赣鄱华章</p>
+  </div>
+</div>
+
+<!-- ============================================
+     贰 · 文化解码板块
+     ============================================ -->
+<section class="section culture" id="culture">
+  <div class="container">
+    <div class="culture-header reveal">
+      <h2 class="section-title">贰 · 文化解码</h2>
+      <p class="section-subtitle">历史渊源 · 非遗传承 · 民俗节庆</p>
+    </div>
+
+    <div class="knowledge-cards">
+      <div class="knowledge-card reveal reveal-delay-1">
+        <span class="kc-tag">历史渊源</span>
+        <h3>滕王与阁的缘起</h3>
+        <p>滕王阁始建于唐永徽四年（653年），由唐太宗李世民之弟、滕王李元婴任洪州（今南昌）都督时所建。李元婴擅长丹青，尤善画蝶，后世称"滕派蝶画"。他建阁初衷为宴饮游乐、观赏赣江美景。阁名虽冠以"滕王"，却因王勃一篇序文而名垂千古，堪称"阁以文传"的典范。</p>
+        <div class="kc-source">📖 引用来源：《旧唐书·卷六十四·滕王元婴传》；《滕王阁志》</div>
+      </div>
+
+      <div class="knowledge-card reveal reveal-delay-2">
+        <span class="kc-tag">非遗传承</span>
+        <h3>南昌瓷板画</h3>
+        <p>南昌瓷板画是江西省非物质文化遗产，以景德镇白瓷板为载体，运用中国画技法与陶瓷工艺相结合。画家在瓷板上以特制颜料作画，经高温烧制后色彩鲜艳、永不褪色。滕王阁景区内设有瓷板画展示馆，游客可近距离观赏这一独特艺术的创作过程。题材多以滕王阁风光、历史人物为主，是南昌文化的重要名片。</p>
+        <div class="kc-source">📖 引用来源：江西省非物质文化遗产名录（2008年列入国家级非遗）</div>
+      </div>
+
+      <div class="knowledge-card reveal reveal-delay-3">
+        <span class="kc-tag">民俗节庆</span>
+        <h3>重阳登高·滕王阁庙会</h3>
+        <p>每年农历九月初九重阳节，滕王阁举办盛大的登高活动，延续了中国传统的重阳登高习俗。活动期间有古乐演奏、诗词朗诵、汉服巡游等文化体验。此外，每年元旦至春节期间举办的"滕王阁庙会"，汇聚赣鄱特色小吃、民间手工艺展示和民俗表演，是南昌最具影响力的文化盛会之一。</p>
+        <div class="kc-source">📖 引用来源：南昌市文化广电新闻出版旅游局；滕王阁管理处年度活动公告</div>
+      </div>
+
+      <div class="knowledge-card reveal reveal-delay-1">
+        <span class="kc-tag">文学经典</span>
+        <h3>《滕王阁序》的诞生</h3>
+        <p>唐上元二年（675年）秋，洪州阎都督重修滕王阁落成，大宴宾客。青年才俊王勃途经洪州，被邀入席。阎都督本欲让女婿吴子章作序以彰其才，不料王勃毫不推辞，挥毫泼墨，一气呵成写下《秋日登洪府滕王阁饯别序》，即传诵千古的《滕王阁序》。"落霞与孤鹜齐飞，秋水共长天一色"成为千古绝唱。</p>
+        <div class="kc-source">📖 引用来源：《唐才子传·王勃》；《古文观止》评注</div>
+      </div>
+
+      <div class="knowledge-card reveal reveal-delay-2">
+        <span class="kc-tag">建筑美学</span>
+        <h3>宋式仿古营造技艺</h3>
+        <p>现存的滕王阁采用宋代建筑风格重建，由著名建筑学家梁思成弟子——华东建筑设计研究院主持设计。建筑严格遵循《营造法式》的规制，采用"明三暗七"格局，主阁南北配有回廊、碑亭。屋顶为歇山顶，覆以绿色琉璃瓦，飞檐翘角处悬挂铜铃。整座建筑既传承了宋代建筑的典雅端庄，又融入了现代结构技术。</p>
+        <div class="kc-source">📖 引用来源：《营造法式》（宋·李诫著）；滕王阁重建工程设计档案</div>
+      </div>
+
+      <div class="knowledge-card reveal reveal-delay-3">
+        <span class="kc-tag">地方特色</span>
+        <h3>赣江文化与水运兴衰</h3>
+        <p>滕王阁临赣江而建，见证了南昌作为赣江水运枢纽的千年兴衰。赣江是江西的母亲河，古代南北交通要道。滕王阁下方的赣江码头曾是商贾云集之地，"襟三江而带五湖"的地理优势使洪州成为江南重镇。如今，赣江两岸已建成现代化滨江景观带，古老阁楼与新城交相辉映。</p>
+        <div class="kc-source">📖 引用来源：《南昌市志》；《读史方舆纪要》</div>
+      </div>
+    </div>
+
+    <!-- 折叠面板：更多文化知识 -->
+    <div class="reveal" style="max-width:800px;margin:0 auto;">
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <span>🎭 滕王阁与赣剧文化</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            赣剧是江西省的地方大戏，起源于明代弋阳腔，被誉为"高腔鼻祖"。滕王阁内设有古戏台，定期上演赣剧经典折子戏。赣剧以高亢激越的唱腔、丰富的脸谱艺术和独特的表演程式著称。2006年，赣剧被列入第一批国家级非物质文化遗产名录。每逢节庆，滕王阁古戏台锣鼓喧天，水袖翻飞，让游客在古阁中感受赣鄱大地的戏曲魅力。
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <span>🖌️ 滕派蝶画与宫廷艺术</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            滕派蝶画由滕王李元婴创始，是中国画中独特的工笔花鸟画派。其特点是以蝴蝶为主角，笔法细腻入微，色彩富丽堂皇，具有浓郁的宫廷艺术风格。滕派蝶画历经唐、宋、元、明、清传承不绝，当代传人仍在延续这一画脉。滕王阁内常年设有蝶画展览，游客可欣赏到这一源自滕王本人的艺术瑰宝。
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <span>🏮 南昌万寿宫与道教文化</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            南昌万寿宫是为纪念晋代道教净明派祖师许逊而建，与滕王阁同为南昌历史文化地标。许逊传说曾治水斩蛟，保护豫章百姓，被尊为"江西福主"。净明道融合儒释道三家思想，主张"忠孝为本"。万寿宫历史文化街区现已修复开放，与滕王阁形成赣江两岸的文化对话，游客可一日之内感受道教文化与盛唐气象的双重洗礼。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 风水古谣与景区概述 -->
+    <div class="reveal" style="max-width:800px;margin:60px auto 0;">
+      <div class="knowledge-card" style="border-left:3px solid var(--gold-leaf);background:rgba(212,175,55,0.05);">
+        <span class="kc-tag">风水古谣</span>
+        <h3>藤断葫芦剪，塔圮豫章残</h3>
+        <p>南昌民间流传着一首古谣："藤断葫芦剪，塔圮豫章残。""藤"谐"滕"音，指滕王阁；"葫芦"乃藏宝之物；"塔"指绳金塔；"圮"为倒塌之意；"豫章"即南昌。意思是：若滕王阁和绳金塔倒塌，豫章城中的人才与宝藏都将流失，城市亦将败落。在我国古代习俗中，人口聚居之地需要风水建筑，一般为当地最高标志性建筑，聚集天地灵气，吸收日月精华，俗称"文笔峰"。滕王阁坐落于赣水之滨，被古人誉为"水笔"。有古语云："求财去万寿宫，求福去滕王阁。"可见滕王阁在世人心目中的神圣地位。</p>
+        <div class="kc-source">📖 引用来源：《南昌市志》；民间口述史料</div>
+      </div>
+    </div>
+
+    <!-- 景区数据一览 -->
+    <div class="reveal" style="max-width:800px;margin:40px auto 0;">
+      <h3 style="font-family:'ZCOOL XiaoWei',serif;font-size:20px;color:var(--text-primary);text-align:center;margin-bottom:24px;">景区一览 · 数字滕王阁</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;">
+        <div style="text-align:center;padding:24px 16px;background:var(--bg-xuanzhi-dark);border-radius:12px;">
+          <div style="font-family:'ZCOOL XiaoWei',serif;font-size:32px;color:var(--gold-leaf);">57.5<span style="font-size:14px;">米</span></div>
+          <div style="font-size:13px;color:var(--text-muted);margin-top:8px;">主阁净高</div>
+        </div>
+        <div style="text-align:center;padding:24px 16px;background:var(--bg-xuanzhi-dark);border-radius:12px;">
+          <div style="font-family:'ZCOOL XiaoWei',serif;font-size:32px;color:var(--gold-leaf);">13000<span style="font-size:14px;">㎡</span></div>
+          <div style="font-size:13px;color:var(--text-muted);margin-top:8px;">建筑面积</div>
+        </div>
+        <div style="text-align:center;padding:24px 16px;background:var(--bg-xuanzhi-dark);border-radius:12px;">
+          <div style="font-family:'ZCOOL XiaoWei',serif;font-size:32px;color:var(--gold-leaf);">29<span style="font-size:14px;">次</span></div>
+          <div style="font-size:13px;color:var(--text-muted);margin-top:8px;">历代重建</div>
+        </div>
+        <div style="text-align:center;padding:24px 16px;background:var(--bg-xuanzhi-dark);border-radius:12px;">
+          <div style="font-family:'ZCOOL XiaoWei',serif;font-size:32px;color:var(--gold-leaf);">5A</div>
+          <div style="font-size:13px;color:var(--text-muted);margin-top:8px;">景区评级</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 页脚 -->
+<footer class="footer-section" id="footer">
+  <div class="footer-poem reveal">
+    阁中帝子今何在？<br>槛外长江空自流。
+  </div>
+  <div class="footer-info reveal">
+    <p>江西省南昌市东湖区仿古街58号</p>
+    <p>电话：(0791) 8670-2636</p>
+    <p>开放时间：08:00 - 18:00（夏季）/ 08:00 - 17:30（冬季）</p>
+    <p style="margin-top:16px;">
+      <a href="#">官方网站</a> · <a href="#">在线购票</a> · <a href="#">虚拟游览</a>
+    </p>
+  </div>
+  <button class="fly-letter-btn reveal">
+    <span class="bird-icon">🕊️</span>
+    <span>飞鸿传书 · 联系我们</span>
+  </button>
+  <div class="footer-copyright">
+    © 2026 滕王阁数字之境 · 设计构想
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
