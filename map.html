@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>滕王阁 · 数字之境 — 陆·探访实录</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;300;400;500;600;700;900&family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- 自定义光标 -->
+<div class="cursor-brush" id="cursorBrush"></div>
+
+<!-- 卷轴进度条 -->
+<div class="scroll-progress" id="scrollProgress">
+  <div class="knob" id="scrollKnob"></div>
+</div>
+
+<!-- 导航栏 -->
+<nav class="nav-capsule" id="navCapsule">
+  <a href="index.html" class="nav-brand">滕王阁</a>
+  <a href="culture.html" class="nav-link" data-section="culture">文化解码</a>
+  <a href="architecture.html" class="nav-link" data-section="architecture">神工天巧</a>
+  <a href="poetry.html" class="nav-link" data-section="poetry">文光射斗</a>
+  <a href="guide.html" class="nav-link" data-section="guide">宴游指南</a>
+  <a href="map.html" class="nav-link active" data-section="map">探访实录</a>
+  <button class="nav-theme-toggle" id="themeToggle" title="切换夜宴模式">🌙</button>
+</nav>
+
+<!-- 灯箱 -->
+<div class="lightbox-overlay" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">✕</button>
+  <img src="" alt="" id="lightboxImg">
+</div>
+
+<!-- 声音控制 -->
+<button class="sound-toggle muted" id="soundToggle" title="开启环境音">🔇</button>
+
+<!-- ====== 页面主体内容 ====== -->
+
+<!-- ============================================
+     陆 · 探访实录（互动地图）
+     ============================================ -->
+<section class="section map-section" id="map">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:60px;" class="reveal">
+      <h2 class="section-title">陆 · 探访实录</h2>
+      <p class="section-subtitle">互动地图 · 必访点位 · 路线推荐</p>
+    </div>
+
+    <div class="map-container reveal">
+      <div class="map-static" id="mapStatic">
+        <div class="map-img-wrapper">
+          <img src="images/scenic-map.png" alt="滕王阁景区游览图" id="scenicMapImg" style="width:100%;height:auto;display:block;">
+          <!-- 标点覆盖层 -->
+          <div class="map-pins-layer" id="mapPinsLayer">
+            <div class="map-marker" style="top:52%;left:35%;" data-spot="tengwang">
+              <div class="marker-dot"></div>
+              <div class="marker-label">滕王阁</div>
+              <div class="marker-popup">
+                <h4>🏯 滕王阁主阁</h4>
+                <p>国家5A级景区核心建筑，仿宋风格，净高57.5米，建筑面积13000平方米。登阁可俯瞰赣江全景，感受"落霞与孤鹜齐飞"的壮丽景象。建议游览时间2-3小时。</p>
+              </div>
+            </div>
+            <div class="map-marker" style="top:12%;left:55%;" data-spot="xianyun">
+              <div class="marker-dot"></div>
+              <div class="marker-label">闲云亭</div>
+              <div class="marker-popup">
+                <h4>☁️ 闲云亭</h4>
+                <p>位于景区北部的高处亭阁，取"闲云潭影日悠悠"之意。登亭可远眺赣江与南昌城景，是景区内最佳的观景休憩之所。</p>
+              </div>
+            </div>
+            <div class="map-marker" style="top:22%;left:72%;" data-spot="changtian">
+              <div class="marker-dot"></div>
+              <div class="marker-label">长天秋水</div>
+              <div class="marker-popup">
+                <h4>🌊 长天秋水</h4>
+                <p>取自"秋水共长天一色"，是景区内临赣江的观景平台。傍晚时分在此欣赏赣江落日，是摄影爱好者的绝佳取景点。</p>
+              </div>
+            </div>
+            <div class="map-marker" style="top:32%;left:38%;" data-spot="sixian">
+              <div class="marker-dot"></div>
+              <div class="marker-label">思贤楼</div>
+              <div class="marker-popup">
+                <h4>🏛️ 思贤楼</h4>
+                <p>位于滕王阁西北侧，为纪念历代文人墨客而建。楼内陈列有与滕王阁相关的诗词碑刻与书画作品。</p>
+              </div>
+            </div>
+            <div class="map-marker" style="top:62%;left:28%;" data-spot="shenfeng">
+              <div class="marker-dot"></div>
+              <div class="marker-label">神风阁</div>
+              <div class="marker-popup">
+                <h4>🎋 神风阁</h4>
+                <p>位于景区西南部，与思贤楼遥相呼应。阁名取自《滕王阁序》中"千里逢迎，高朋满座"的盛景描绘。</p>
+              </div>
+            </div>
+            <div class="map-marker" style="top:75%;left:58%;" data-spot="wuhua">
+              <div class="marker-dot"></div>
+              <div class="marker-label">物华天宝</div>
+              <div class="marker-popup">
+                <h4>🚪 物华天宝</h4>
+                <p>取自"物华天宝，龙光射牛斗之墟"，是景区南部的标志性门楼建筑，也是南门入口处的主要景观。</p>
+              </div>
+            </div>
+            <div class="map-marker gate-marker" style="top:10%;left:82%;" data-spot="northgate">
+              <div class="marker-dot gate-dot"></div>
+              <div class="marker-label">北门</div>
+              <div class="marker-popup">
+                <h4>🚩 北门入口</h4>
+                <p>景区主要入口之一，临近抚河北路。建议从此门进入，沿主路向南游览至滕王阁主阁。</p>
+              </div>
+            </div>
+            <div class="map-marker gate-marker" style="top:85%;left:22%;" data-spot="southgate">
+              <div class="marker-dot gate-dot"></div>
+              <div class="marker-label">南门</div>
+              <div class="marker-popup">
+                <h4>🚩 南门入口</h4>
+                <p>景区南部入口，临近赣江边。从此门进入可先欣赏江景，再向北游览至主阁。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="map-caption">
+          <span class="map-caption-title">滕王阁景区游览图</span>
+          <span class="map-caption-hint">点击标点查看景点介绍 · 共8个标注点</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 推荐路线 -->
+    <div style="max-width:800px;margin:60px auto 0;" class="reveal">
+      <h3 style="font-family:'ZCOOL XiaoWei',serif;font-size:20px;color:var(--text-primary);text-align:center;margin-bottom:30px;">📜 推荐游览路线</h3>
+      <div class="accordion-item open">
+        <div class="accordion-header">
+          <span>🚶 半日精华游（约4小时）</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-body" style="max-height:200px;">
+          <div class="accordion-body-inner">
+            滕王阁主景区（2小时）→ 赣江风光带漫步（30分钟）→ 胜利路步行街午餐（1小时）→ 绳金塔（1小时）。适合时间有限的游客，涵盖最核心的文化体验与美食享受。
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <span>📅 一日深度游（约8小时）</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            上午：滕王阁主景区（含登阁、观演出）→ 八一纪念馆 → 午餐（瓦罐煨汤+拌粉）。下午：绳金塔及美食街 → 万寿宫历史文化街区 → 傍晚返回滕王阁观赣江落日。这条路线涵盖了南昌最精华的历史文化景点，建议穿舒适的步行鞋。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 页脚 -->
+<footer class="footer-section" id="footer">
+  <div class="footer-poem reveal">
+    阁中帝子今何在？<br>槛外长江空自流。
+  </div>
+  <div class="footer-info reveal">
+    <p>江西省南昌市东湖区仿古街58号</p>
+    <p>电话：(0791) 8670-2636</p>
+    <p>开放时间：08:00 - 18:00（夏季）/ 08:00 - 17:30（冬季）</p>
+    <p style="margin-top:16px;">
+      <a href="#">官方网站</a> · <a href="#">在线购票</a> · <a href="#">虚拟游览</a>
+    </p>
+  </div>
+  <button class="fly-letter-btn reveal">
+    <span class="bird-icon">🕊️</span>
+    <span>飞鸿传书 · 联系我们</span>
+  </button>
+  <div class="footer-copyright">
+    © 2026 滕王阁数字之境 · 设计构想
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
