@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>滕王阁 · 数字之境 — 肆·文光射斗</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;300;400;500;600;700;900&family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- 自定义光标 -->
+<div class="cursor-brush" id="cursorBrush"></div>
+
+<!-- 卷轴进度条 -->
+<div class="scroll-progress" id="scrollProgress">
+  <div class="knob" id="scrollKnob"></div>
+</div>
+
+<!-- 导航栏 -->
+<nav class="nav-capsule" id="navCapsule">
+  <a href="index.html" class="nav-brand">滕王阁</a>
+  <a href="culture.html" class="nav-link" data-section="culture">文化解码</a>
+  <a href="architecture.html" class="nav-link" data-section="architecture">神工天巧</a>
+  <a href="poetry.html" class="nav-link active" data-section="poetry">文光射斗</a>
+  <a href="guide.html" class="nav-link" data-section="guide">宴游指南</a>
+  <a href="map.html" class="nav-link" data-section="map">探访实录</a>
+  <button class="nav-theme-toggle" id="themeToggle" title="切换夜宴模式">🌙</button>
+</nav>
+
+<!-- 灯箱 -->
+<div class="lightbox-overlay" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">✕</button>
+  <img src="" alt="" id="lightboxImg">
+</div>
+
+<!-- 声音控制 -->
+<button class="sound-toggle muted" id="soundToggle" title="开启环境音">🔇</button>
+
+<!-- ====== 页面主体内容 ====== -->
+
+<!-- 文光射斗 · 全幅背景横幅 -->
+<div class="section-parallax" data-speed="0.25">
+  <div class="parallax-bg" style="background-image:url('images/bg-ink-pavilion.png')"></div>
+  <div class="parallax-overlay parallax-overlay--ink"></div>
+  <div class="parallax-content">
+    <p class="parallax-quote">落霞与孤鹜齐飞 · 秋水共长天一色</p>
+  </div>
+</div>
+
+<!-- ============================================
+     肆 · 文光射斗（诗赋光影廊）
+     ============================================ -->
+<section class="section poetry" id="poetry">
+  <div class="container">
+    <div class="poetry-header reveal">
+      <h2 class="section-title">肆 · 文光射斗</h2>
+      <p class="section-subtitle">诗赋光影 · 千古名篇 · 名人题咏</p>
+    </div>
+
+    <!-- 名句展示 -->
+    <div class="quote-showcase reveal">
+      <div class="big-quote">
+        落霞与孤鹜齐飞<span class="punctuation-dot"></span><br>
+        秋水共长天一色<span class="punctuation-dot"></span>
+      </div>
+      <div class="modern-translation">
+        晚霞与孤独的野鸭一齐飞翔，秋天的江水和辽阔的天空连成一片相同的颜色。<br>
+        ——此句以动静结合、色彩对比的手法，将赣江秋景描绘得如诗如画，被誉为千古写景名句。
+      </div>
+    </div>
+
+    <!-- 更多名句 -->
+    <div class="quote-showcase reveal" style="margin-top:60px;">
+      <div class="big-quote">
+        豫章故郡<span class="punctuation-dot"></span>洪都新府<span class="punctuation-dot"></span><br>
+        星分翼轸<span class="punctuation-dot"></span>地接衡庐<span class="punctuation-dot"></span>
+      </div>
+      <div class="modern-translation">
+        这里是过去的豫章郡，如今是新的洪州府。天空的星宿对应翼、轸二星，大地的疆域连接衡山与庐山。<br>
+        ——开篇以宏大的地理视野定位洪州，展现了作者渊博的学识与开阔的胸襟。
+      </div>
+    </div>
+
+    <!-- 诗笺墙 -->
+    <div style="text-align:center;margin:80px 0 40px;" class="reveal">
+      <h3 style="font-family:'ZCOOL XiaoWei',serif;font-size:24px;color:var(--text-primary);">名人题咏 · 诗笺墙</h3>
+      <p style="font-size:14px;color:var(--text-muted);margin-top:8px;">悬停翻转，品读诗笺背后的故事</p>
+    </div>
+
+    <div class="poem-wall">
+      <div class="poem-card reveal reveal-delay-1">
+        <div class="poem-card-inner">
+          <div class="poem-card-front">
+            <div class="poem-text">滕王高阁临江渚佩玉鸣鸾罢歌舞画栋朝飞南浦云珠帘暮卷西山雨</div>
+            <div class="poem-author">唐 · 王勃</div>
+          </div>
+          <div class="poem-card-back">
+            <h4>王勃与滕王阁</h4>
+            <p>王勃（650-676），初唐四杰之首。上元二年途经洪州，在阎都督的宴席上即兴写下《滕王阁序》，时年不过二十余岁。此序文辞华美、对仗工整，被誉为"天下第一骈文"。可惜王勃在渡海探父时溺水而亡，年仅二十七岁，留下了这篇千古绝唱。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="poem-card reveal reveal-delay-2">
+        <div class="poem-card-inner">
+          <div class="poem-card-front">
+            <div class="poem-text">阁中帝子今何在槛外长江空自流</div>
+            <div class="poem-author">唐 · 王勃</div>
+          </div>
+          <div class="poem-card-back">
+            <h4>帝子何在</h4>
+            <p>"阁中帝子今何在？槛外长江空自流。"这是《滕王阁诗》的结尾，以设问作结，余韵悠长。当年建阁的滕王早已消逝在历史长河中，唯有槛外的赣江水依旧日夜奔流。物是人非的感慨，道出了人生无常的哲理，千百年来引发无数读者的共鸣。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="poem-card reveal reveal-delay-3">
+        <div class="poem-card-inner">
+          <div class="poem-card-front">
+            <div class="poem-text">落霞与孤鹜齐飞秋水共长天一色</div>
+            <div class="poem-author">唐 · 王勃</div>
+          </div>
+          <div class="poem-card-back">
+            <h4>千古名句</h4>
+            <p>此句被历代文人奉为写景的巅峰之作。上句写动态——落霞缓缓下沉、孤鹜翩翩飞翔；下句写静态——秋水澄澈、长天一色。动静相生、虚实相映，色彩上红（霞）与碧（水天）对比鲜明。据说此句化用自庾信《马射赋》"落花与芝盖同飞，杨柳共春旗一色"，但青出于蓝而胜于蓝。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="poem-card reveal reveal-delay-4">
+        <div class="poem-card-inner">
+          <div class="poem-card-front">
+            <div class="poem-text">老当益壮宁移白首之心穷且益坚不坠青云之志</div>
+            <div class="poem-author">唐 · 王勃</div>
+          </div>
+          <div class="poem-card-back">
+            <h4>青云之志</h4>
+            <p>这是《滕王阁序》中最为励志的名句。王勃当时正处于人生的低谷——被逐出沛王府、远谪交趾。然而他在序文中表达的却是昂扬向上的精神：年纪大了应当更加壮志凌云，处境艰难更要坚定信念。这种不屈服于命运的精神力量，使这两句成为后世无数仁人志士的座右铭。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="poem-card reveal reveal-delay-1">
+        <div class="poem-card-inner">
+          <div class="poem-card-front">
+            <div class="poem-text">物换星移几度秋阁中帝子今何在</div>
+            <div class="poem-author">唐 · 王勃</div>
+          </div>
+          <div class="poem-card-back">
+            <h4>物换星移</h4>
+            <p>"物换星移几度秋"——世间万物更替、星辰移位，不知已经过去了多少个秋天。王勃以宇宙的永恒与人生的短暂形成对比，表达了对时光流逝的深沉感慨。这一意象后来演变为成语"物换星移"，用来形容世事变迁、时光流转。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="poem-card reveal reveal-delay-2">
+        <div class="poem-card-inner">
+          <div class="poem-card-front">
+            <div class="poem-text">闲云潭影日悠悠物换星移几度秋</div>
+            <div class="poem-author">唐 · 王勃</div>
+          </div>
+          <div class="poem-card-back">
+            <h4>闲云潭影</h4>
+            <p>"闲云潭影日悠悠"——悠闲的白云倒映在深潭之中，日子就这样悠然流逝。王勃用"闲"字写云，用"影"字写潭，以极简的笔墨营造出空灵悠远的意境。这一句与"落霞与孤鹜齐飞"遥相呼应，一静一动，构成了《滕王阁诗》中最具画面感的对仗。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 楹联匾额鉴赏 -->
+    <div class="reveal" style="max-width:800px;margin:60px auto 0;">
+      <h3 style="font-family:'ZCOOL XiaoWei',serif;font-size:24px;color:var(--text-primary);text-align:center;margin-bottom:12px;">楹联匾额 · 阁上翰墨</h3>
+      <p style="font-size:14px;color:var(--text-muted);text-align:center;margin-bottom:40px;">滕王阁各层悬挂的匾额楹联，集历代书法与文学精华</p>
+    </div>
+    <div class="couplet-gallery reveal" style="max-width:800px;margin:0 auto;">
+      <div class="couplet-card">
+        <div class="couplet-text">瑰伟绝特</div>
+        <div class="couplet-desc">——滕王阁正匾，草书，出自唐代书法家怀素狂草风格。此四字概括了滕王阁"瑰丽伟岸、绝世奇特"的建筑气质，是阁楼最具标志性的匾额。</div>
+      </div>
+      <div class="couplet-card">
+        <div class="couplet-text">落霞与孤鹜齐飞<br>秋水共长天一色</div>
+        <div class="couplet-desc">——五层铜碑，苏东坡手书《滕王阁序》节选。黄铜板手工镌刻，面积近10平方米，是阁内最珍贵的书法碑刻之一。</div>
+      </div>
+      <div class="couplet-card">
+        <div class="couplet-text">襟三江而带五湖<br>控蛮荆而引瓯越</div>
+        <div class="couplet-desc">——出自《滕王阁序》，形容洪州（南昌）地理位置的险要与壮阔。滕王阁坐落于赣江之滨，正应了"襟三江而带五湖"的地理形胜。</div>
+      </div>
+      <div class="couplet-card">
+        <div class="couplet-text">物华天宝<br>龙光射牛斗之墟</div>
+        <div class="couplet-desc">——此句化用晋代张华见牛斗二星之间有紫气、掘地得龙泉宝剑的典故。南昌因此被称为"剑邑"，滕王阁景区南门即以"物华天宝"命名。</div>
+      </div>
+      <div class="couplet-card">
+        <div class="couplet-text">东隅已逝<br>桑榆非晚</div>
+        <div class="couplet-desc">——"虽然早年的时光已经逝去，但珍惜晚年也为时不晚。"此联为《滕王阁序》中的励志名句，告诫人们不论何时都不应放弃追求，至今仍被广泛引用。</div>
+      </div>
+      <div class="couplet-card">
+        <div class="couplet-text">老当益壮<br>穷且益坚</div>
+        <div class="couplet-desc">——"年纪大了应当更加壮志凌云，处境艰难更要坚定信念。"王勃以昂扬的精神力量写就的千古名句，成为后世无数仁人志士的座右铭，也是滕王阁文化精神的核心表达。</div>
+      </div>
+    </div>
+
+    <!-- 图片画廊（卷轴横滚） -->
+    <div class="gallery-scroll reveal">
+      <div class="gallery-scroll-title">
+        <h3 style="font-family:'ZCOOL XiaoWei',serif;font-size:24px;color:var(--text-primary);">探访实录 · 图卷</h3>
+        <p style="font-size:14px;color:var(--text-muted);margin-top:8px;">以下均为实地拍摄的原创摄影作品</p>
+        <p style="font-size:12px;color:var(--text-muted);margin-top:4px;">← 横向滑动，如展长卷 →</p>
+      </div>
+      <div style="display:flex;align-items:stretch;">
+        <div class="scroll-ornament"></div>
+        <div class="gallery-track" id="galleryTrack">
+          <div class="gallery-item" data-lightbox>
+            <img src="images/tengwang-3.jpg" alt="滕王阁全景">
+            <div class="gallery-caption">
+              <h4>滕王阁全景</h4>
+              <p>站在赣江西岸远眺，滕王阁巍然矗立于东岸，与现代高楼形成跨越千年的对话。碧瓦重檐的古典楼阁与玻璃幕墙的摩天大厦同框，展现了南昌这座城市传统与现代交融的独特风貌。蓝天白云下，阁楼层层飞檐如翼伸展，石砌的江堤与碧绿的江水相映成趣，尽显"江南三大名楼"的恢宏气势。</p>
+              <p style="font-size:11px;color:var(--text-muted);margin-top:8px;">📷 原创摄影</p>
+            </div>
+          </div>
+          <div class="gallery-item" data-lightbox>
+            <img src="images/tengwang-2.jpg" alt="滕王阁内部藻井">
+            <div class="gallery-caption">
+              <h4>内部藻井与彩绘</h4>
+              <p>步入滕王阁顶层，抬头仰望，眼前的螺旋藻井令人屏息。层层叠叠的斗拱结构以完美的几何螺旋向中心收拢，朱红色的底色上绘有精美的龙凤纹饰，金箔贴饰在暖黄灯光下熠熠生辉。四角悬挂的宫灯与藻井中心的吊灯交相辉映，匾额上"九重天"三字更添庄严肃穆之感，尽显宋代宫廷建筑的典雅与华贵。</p>
+              <p style="font-size:11px;color:var(--text-muted);margin-top:8px;">📷 原创摄影</p>
+            </div>
+          </div>
+          <div class="gallery-item" data-lightbox>
+            <img src="images/tengwang-1.jpg" alt="赣江落日">
+            <div class="gallery-caption">
+              <h4>赣江落日</h4>
+              <p>傍晚时分登上滕王阁最高层，凭栏远眺，终于理解了王勃笔下"落霞与孤鹜齐飞，秋水共长天一色"的意境。夕阳西沉，金色的阳光洒在赣江水面，波光粼粼如同碎金。远处的南昌天际线在晚霞中若隐若现，现代高楼与古老阁楼在暮色中遥相呼应。那一刻，千年的历史仿佛在这一瞬凝固，让人不禁感叹"阁中帝子今何在，槛外长江空自流"。</p>
+              <p style="font-size:11px;color:var(--text-muted);margin-top:8px;">📷 原创摄影</p>
+            </div>
+          </div>
+          <div class="gallery-item" data-lightbox>
+            <img src="images/tengwang-6.jpg" alt="滕王阁夜景">
+            <div class="gallery-caption">
+              <h4>滕王阁夜景</h4>
+              <p>傍晚时分登临滕王阁，眼前的美景令人心潮澎湃。夕阳的余晖将天际染成橙红，与赣江水面上的倒影交相辉映。阁楼在绿光与金光的照耀下熠熠生辉，七层飞檐层层叠叠，如同展翅欲飞的凤凰。远处的南昌现代高楼林立，展现了这座城市蓬勃发展的活力。灯火璀璨中，古今交汇，仿佛穿越千年时光，与王勃共赏这"落霞与孤鹜齐飞"的壮丽景象。</p>
+              <p style="font-size:11px;color:var(--text-muted);margin-top:8px;">📷 原创摄影</p>
+            </div>
+          </div>
+          <div class="gallery-item" data-lightbox>
+            <img src="images/tengwang-4.jpg" alt="滕王阁庭院">
+            <div class="gallery-caption">
+              <h4>阁前庭院与回廊</h4>
+              <p>滕王阁不仅主阁雄伟，其附属的园林庭院同样别有洞天。一池碧水倒映着垂柳与假山，湖石堆叠的假山错落有致，荷叶点缀水面，尽显江南园林的雅致。朱红色的回廊与亭阁掩映在绿树丛中，与远处的主阁遥相呼应。漫步其间，石板路上苔痕斑驳，垂柳轻拂水面，仿佛能听到千年前文人墨客在此吟诗唱和的余韵，让人流连忘返。</p>
+              <p style="font-size:11px;color:var(--text-muted);margin-top:8px;">📷 原创摄影</p>
+            </div>
+          </div>
+        </div>
+        <div class="scroll-ornament"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 页脚 -->
+<footer class="footer-section" id="footer">
+  <div class="footer-poem reveal">
+    阁中帝子今何在？<br>槛外长江空自流。
+  </div>
+  <div class="footer-info reveal">
+    <p>江西省南昌市东湖区仿古街58号</p>
+    <p>电话：(0791) 8670-2636</p>
+    <p>开放时间：08:00 - 18:00（夏季）/ 08:00 - 17:30（冬季）</p>
+    <p style="margin-top:16px;">
+      <a href="#">官方网站</a> · <a href="#">在线购票</a> · <a href="#">虚拟游览</a>
+    </p>
+  </div>
+  <button class="fly-letter-btn reveal">
+    <span class="bird-icon">🕊️</span>
+    <span>飞鸿传书 · 联系我们</span>
+  </button>
+  <div class="footer-copyright">
+    © 2026 滕王阁数字之境 · 设计构想
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
